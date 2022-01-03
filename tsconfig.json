@@ -3,8 +3,8 @@
   "compilerOptions": {
     "lib": ["DOM","ESNext"],
     "preserveConstEnums": true,
-    "target": "ESNext",
-    "module": "ESNext",
+    "target": "esnext",
+    "module": "esnext",
     "paths": {
       "$lib": ["./app/lib"],
       "$lib/*": ["./app/lib/*"]

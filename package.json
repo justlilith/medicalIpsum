@@ -2,7 +2,8 @@
   "name": "medicalipsum",
   "scripts": {
     "start": "imba -w server.imba",
-    "build": "imba build server.imba"
+    "build": "imba build server.imba",
+    "bundle": "node copyAssets"
   },
   "dependencies": {
     "express": "^4.17.1",
