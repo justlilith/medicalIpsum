@@ -1,0 +1,20 @@
+{
+  "name": "medicalipsum",
+  "scripts": {
+    "start": "imba -w server.imba",
+    "build": "imba build server.imba"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "imba": "^2.0.0-alpha.199"
+  },
+  "repository": "justlilith/medicalIpsum",
+  "description": "Medicine-flavoured lorem ipsum generator",
+  "version": "1.0.0",
+  "homepage": "https://github.com/justlilith/medicalIpsum",
+  "author": "Lilith (https://github.com/justlilith)",
+  "license": "MIT",
+  "devDependencies": {
+    "@tsconfig/node16": "^1.0.2"
+  }
+}
