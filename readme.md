@@ -2,6 +2,8 @@
 
 (working title)
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/aeda1617-3497-4b39-b6d3-c237b2f681b0/deploy-status)](https://app.netlify.com/sites/confident-elion-574814/deploys)
+
 ## Description
 
 Lorem ipsum generator that includes medical terms and phrases. I've made this so that I have better working copy for stuff at my day job (I work in medicine) than plain lorem ipsum.
