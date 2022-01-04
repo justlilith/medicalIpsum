@@ -2,11 +2,12 @@
   "name": "medicalipsum",
   "scripts": {
     "start": "imba -w server.imba",
-    "build": "imba build server.imba",
-    "bundle": "node copyAssets"
+    "build": "imba build server.imba && npm run bundle",
+    "bundle": "rollup -c"
   },
   "dependencies": {
     "express": "^4.17.1",
+    "glob": "^7.2.0",
     "imba": "^2.0.0-alpha.199"
   },
   "repository": "justlilith/medicalIpsum",
@@ -16,6 +17,9 @@
   "author": "Lilith (https://github.com/justlilith)",
   "license": "MIT",
   "devDependencies": {
-    "@tsconfig/node16": "^1.0.2"
+    "@tsconfig/node16": "^1.0.2",
+    "rollup": "^2.63.0",
+    "rollup-plugin-copy": "^3.4.0",
+    "rollup-plugin-copy-assets": "^2.0.3"
   }
 }

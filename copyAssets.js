@@ -1,15 +1,17 @@
 const fs = require('node:fs')
+const glob = require('glob')
 
 const src = "./app/lib/assets/static"
 const dest = `./dist/public`
 
-let files = deepRead(src)
-files = files.flat()
+let files = glob.sync(`${src}/**/*`)
+// let { files } = deepRead({src})
 console.log(files)
 
 // fs.mkdirSync(dest)
 
 const ops = files.map(async file => {
+  console.log(file)
   return new Promise((resolve, reject) => {
     fs.copyFile(file, dest, (e)=>{
       if (e) {
@@ -27,14 +29,20 @@ Promise.all(ops)
 .catch(() => console.log(`Assets not copied! 🥲`))
 
 
-function deepRead (path) {
-  const files = fs.readdirSync(path)
-  if (files) {
+function deepRead (args) {
+  try {
+    const fileDirectory = fs.opendirSync(args.src)
+    for (let i in fileDirectory) {
+      const fileName = i.readSync()
+
+    }
     const newFiles = files.map(file => {
-      deepRead(file)
+      return deepRead({src:file, files: args.files})
     })
-    return newFiles
-  } else {
-    return path
+    return newFiles.flat()
+  } catch (e) {
+    console.warn(e)
+    console.warn(args)
+    return args.files ? {files: args.files} : {files: []}
   }
 }

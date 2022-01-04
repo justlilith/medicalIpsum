@@ -10,7 +10,7 @@ const medicalPhrases = "can be intubated, should reflect, compared to, data pres
 
 const loremBOW = [...lorem.matchAll(regex)].map(item => item[0])
 const medicalBOW = [...medicalTerms.matchAll(regex)].map(item => item[0])
-const medicalPhraseBOW = [...medicalPhrases.split(",")]
+const medicalPhraseBOW = [...medicalPhrases.split(", ")]
 
 export {
   loremBeginning
