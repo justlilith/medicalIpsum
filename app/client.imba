@@ -1,14 +1,13 @@
 import * as Constants from '$lib/constants'
 import * as Helpers from '$lib/helpers'
 
-let ipsumArgs = {
+let ipsum-args = {
 	medAmount\number
 	, length\number
 }
-let outBlock\string = ""
+let out-block\string = ""
 
-global css html
-	ff:sans
+# APP
 
 tag app
 	<self>
@@ -16,14 +15,23 @@ tag app
 			<h1> "Medical Ipsum"
 			<p> "Lorem ipsum generator with medical flair 💊"
 			<section>
-				<label d:block> "How much medicine?"
-				<input d:block type="range" bind=ipsumArgs.medAmount data="50">
-				<label d:block> "How much text?"
-				<input d:block type="number" bind=ipsumArgs.length data="5">
-				<button d:block @click.prevent=(do (outBlock = Helpers.generateIpsum(ipsumArgs)))> "Generate ipsum, stat!"
-			# <input> "Ipsum"
-			# <p> "{loremBOW[9]}"
+				<label c:label> "How much medicine?"
+				<input type="range" bind=ipsum-args.medAmount data="50">
+				<label c:label> "How much text?"
+				<input type="number" bind=ipsum-args.length data="5">
+				<button @click.prevent=(do (outBlock = Helpers.generateIpsum(ipsum-args)))> "Generate ipsum, stat!"
 			<section>
-				<textarea bind=outBlock>
+				<textarea bind=out-block>
+				<button @click.prevent=(do Helpers.copyToClipboard(out-block))> "Copy to clipboard"
+	# CSS
+	css button d:block
+	css label d:block
+	css	input d:block
 
 imba.mount <app>
+
+# CSS
+
+global css html
+	ff:sans
+

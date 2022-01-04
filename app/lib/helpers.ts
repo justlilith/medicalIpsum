@@ -2,6 +2,19 @@ import * as Constants from '$lib/constants'
 
 const regex = new RegExp(/\w+/g)
 
+
+
+async function copyToClipboard (text:string) {
+  navigator.permissions.query({name:'persistent-storage'}).then(function(result) {
+    if (result.state === 'granted') {
+      navigator.clipboard.writeText(text)
+    } else if (result.state === 'prompt') {
+      null
+    }
+    // Don't do anything if the permission was denied.
+  });
+}
+
 function generateIpsum(args:any) {
   let length:number = args.length
   const coeff:number = args.medAmount
