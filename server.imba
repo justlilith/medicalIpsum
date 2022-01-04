@@ -3,6 +3,8 @@ import index from './app/index.html'
 
 const app = express!
 
+app.use('/', express.static('app/lib/assets/static'))
+
 # catch-all route that returns our index.html
 app.get(/.*/) do(req,res)
 	# only render the html for requests that prefer an html response
