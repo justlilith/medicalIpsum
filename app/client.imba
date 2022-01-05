@@ -4,7 +4,8 @@ import '$lib/tags/theme-switch.imba'
 
 let state = {
 	dark-mode\boolean : true
-	theme: 'dark'
+	theme\string: 'dark'
+	scholarMode\string: 'disabled'
 	} # using number as a bool here because range input
 
 let ipsum-args = {
@@ -15,9 +16,22 @@ let out-block\string = ""
 
 console.log("MI [i]: Now running . . .")
 
+
+const flipMode = do(input)
+	console.log input
+	const test =
+		switch input
+			when 'enabled'
+				'disabled'
+			when 'disabled'
+				'enabled'
+	console.log test
+	test
+
 # APP
 
 tag app
+		
 	<self.{state.theme}.self>
 		<theme-switch bind=state>
 		<header>
@@ -30,8 +44,14 @@ tag app
 				<input.{state.theme} type="range" bind=ipsum-args.medAmount data="90">
 			<div.row>
 				<label.label> "How many sentences?"
-				<input.{state.theme} type="number" bind=ipsum-args.length data="5">
-			<button.{state.theme} @click.prevent=(do (out-block = Helpers.generateIpsum ipsum-args; state.theme = 'dark'))> "Generate ipsum, stat!"
+				<input.{state.theme}.sentences type="number" bind=ipsum-args.length data="19">
+			# <div.row>
+			# 	<label.label> "Scholar mode?"
+			# 	if state.scholarMode.toLowerCase! == `enabled`
+			# 		<button.enabled.scholar-button @click.prevent=(do (state.scholarMode = flipMode(state.scholarMode)))> "Enabled"
+			# 	else
+			# 		<button.disabled.scholar-button @click.prevent=(do (state.scholarMode = flipMode(state.scholarMode)))> "Disabled"
+			<button.{state.theme} @click.prevent=(do (out-block = await Helpers.generateIpsum {...ipsum-args, scholarMode:state.scholarMode}))> "Generate ipsum, stat!"
 		<section>
 			<section.out>
 				<p.out-block> out-block
@@ -40,7 +60,7 @@ tag app
 # CSS
 
 css * ff:serif p:0.5em ta:center a:center m:auto rd:2px
-css .self w:50% p:0 25% h:100% pos:fixed
+css .self w:50% p:0 25% min-height:100vh pos:relative
 css h1 ff:Garamond,serif ta:center
 css p ta:center
 css .divider w:20% bdb:thin solid grey h:5px
@@ -48,8 +68,13 @@ css .container d:flex fld:column
 	* m:.25em a:center ta:left
 css .row d:flex fld:row w:50%
 	.label flg:100 ta:left
-	input flg:100 ta:cener
-css [type="range"] w:30
+	input ta:center
+css .sentences w:30
+css .scholar w:20px
+css .scholar-button bd:none
+css .scholar-button.enabled bgc:green4 c:green9
+css .scholar-button.disabled bgc:red9 c:red2
+css .disbled bgc:red4 c:red9
 css button,input d:block bd:thin solid grey
 css .out min-height:200px bd:thick solid grey d:flex fld:column jc:end bs:ridge
 css .out-block m:0 auto flg:100

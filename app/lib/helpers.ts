@@ -15,15 +15,23 @@ async function copyToClipboard (text:string) {
   });
 }
 
-function generateIpsum(args:any) {
+async function generateIpsum(args:any) {
   console.log('invoking!!')
   let length:number = args.length
   const coeff:number = args.medAmount
   let outBlock:string = ""
   
-  while (length > 0) {
-    outBlock = outBlock.concat(generateSentence(coeff), " ")
-    length -= 1
+  switch (args.scholarMode) {
+    case 'enabled':
+      outBlock = await (await fetch('https://google.com')).json()
+    break
+    case 'disabled':
+    while (length > 0) {
+      outBlock = outBlock.concat(generateSentence(coeff), " ")
+      length -= 1
+    }
+    default:
+    break
   }
   
   console.log(outBlock)
