@@ -6,11 +6,14 @@ const regex = new RegExp(/\w+/g)
 
 async function copyToClipboard (text:string) {
   console.log("MI [i]: Attempting to copy to clipboard . . .")
-  navigator.permissions.query({name:'persistent-storage'}).then(function(result) {
+  navigator.permissions.query({name:'persistent-storage'})
+  .then(function(result) {
+    console.log(result)
     if (result.state === 'granted') {
       navigator.clipboard.writeText(text)
     } else if (result.state === 'prompt') {
       null
+      navigator.clipboard.writeText(text)
     }
     // Don't do anything if the permission was denied.
   });
