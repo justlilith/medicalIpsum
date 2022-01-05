@@ -1,7 +1,7 @@
 import * as Constants from '$lib/constants'
 
 const regex = new RegExp(/\w+/g)
-
+const storage = window.localStorage
 
 
 async function copyToClipboard (text:string) {
@@ -9,12 +9,8 @@ async function copyToClipboard (text:string) {
   navigator.permissions.query({name:'persistent-storage'})
   .then(function(result) {
     console.log(result)
-    if (result.state === 'granted') {
-      navigator.clipboard.writeText(text)
-    } else if (result.state === 'prompt') {
-      null
-      navigator.clipboard.writeText(text)
-    }
+    if (text.length > 0)
+    navigator.clipboard.writeText(text)
     // Don't do anything if the permission was denied.
   });
 }
@@ -86,8 +82,25 @@ function generateSentence(coeff:number) {
   return `${sentence}`
 }
 
+function getStorage (key:string) {
+  return storage.getItem(key) ?? ""
+}
+
+function setStorage (args:Record<string,any>) {
+  try {
+    storage.setItem(args.key,args.value)
+    return "OK"
+  } catch (err) {
+    return err
+  }
+}
+
+
+
 export {
   copyToClipboard
   , generateIpsum
   , generateSentence
+  , getStorage
+  , setStorage
 }
