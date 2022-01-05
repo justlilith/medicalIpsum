@@ -16,6 +16,7 @@ const regex = new RegExp(/\w+/g)
 // }
 
 function generateIpsum(args:any) {
+  console.log('invoking!!')
   let length:number = args.length
   const coeff:number = args.medAmount
   let outBlock:string = ""
@@ -25,6 +26,7 @@ function generateIpsum(args:any) {
     length -= 1
   }
   
+  console.log(outBlock)
   return outBlock
   
 }
@@ -44,7 +46,7 @@ function generateSentence(coeff:number) {
   ]
   
   let sentence:string = ""
-  while (length > 0) {
+  while (length >= 0) {
     let odds = Math.floor(Math.random() * coeff) //e.g. 71.2 w/ coeff of 100
     /**
     * if coeff is 100, then def grab from medical
@@ -59,18 +61,18 @@ function generateSentence(coeff:number) {
       switch (odds > 60) {
         case true:
         const indexP = Math.floor(Math.random() * Constants.medicalPhraseBOW.length)
-        sentence = sentence.concat(Constants.medicalPhraseBOW[indexP], " ")
+        sentence = sentence.concat(Constants.medicalPhraseBOW.slice(indexP)[0], " ")
         break
         case false:
         default:
         const index = Math.floor(Math.random() * Constants.medicalBOW.length)
-        sentence = sentence.concat(Constants.medicalBOW[index], " ")
+        sentence = sentence.concat(Constants.medicalBOW.slice(index)[0], " ")
       }
       break
       case false:
       default:
       const index = Math.floor(Math.random() * Constants.loremBOW.length)
-      sentence = sentence.concat(Constants.loremBOW[index], " ")
+      sentence = sentence.concat(Constants.loremBOW.slice(index)[0], " ")
     }
     length--
   }
