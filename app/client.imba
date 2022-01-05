@@ -7,6 +7,8 @@ let ipsum-args = {
 }
 let out-block\string = ""
 
+console.log("test")
+
 # APP
 
 tag app
@@ -14,24 +16,20 @@ tag app
 		<header>
 			<h1> "Medical Ipsum"
 			<p> "Lorem ipsum generator with medical flair 💊"
-			<section>
-				<label c:label> "How much medicine?"
-				<input type="range" bind=ipsum-args.medAmount data="50">
-				<label c:label> "How much text?"
-				<input type="number" bind=ipsum-args.length data="5">
-				<button @click.prevent=(do (outBlock = Helpers.generateIpsum(ipsum-args)))> "Generate ipsum, stat!"
-			<section>
-				<textarea bind=out-block>
-				<button @click.prevent=(do Helpers.copyToClipboard(out-block))> "Copy to clipboard"
+		<section>
+			<label .label> "How much medicine?"
+			<input type="range" bind=ipsum-args.medAmount data="90">
+			<label .label> "How many sentences?"
+			<input type="number" bind=ipsum-args.length data="5">
+			<button @click.prevent=(do (outBlock = Helpers.generateIpsum(ipsum-args)))> "Generate ipsum, stat!"
+		<section>
+			<button .clipboard @click.prevent=(do Helpers.copyToClipboard(out-block))> "Copy to clipboard"
+			<textarea bind=out-block>
 	# CSS
-	css button d:block
-	css label d:block
-	css	input d:block
+	css * ff:serif p:.5em c:black
+		self w:50% m:auto
+		h1 ff:Garamond,serif ta:center
+		p ta:center
+		button,input d:block
 
 imba.mount <app>
-
-# CSS
-
-global css html
-	ff:sans
-
